@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>WebXR - FBX Local Animations</title>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        #app-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #ui-overlay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .anim-btn {
+            background: rgba(0, 123, 255, 0.8);
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: transform 0.2s, background 0.2s;
+            text-align: center;
+        }
+
+        .anim-btn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .anim-btn.active {
+            background: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app-container"></div>
+    <div id="ui-overlay">
+        <div
+            style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; color:white; text-align:center; margin-bottom:10px;">
+            Selecciona Animación
+        </div>
+        <div id="buttons-container" style="display:flex; flex-direction:column; gap:5px; pointer-events:auto;"></div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
