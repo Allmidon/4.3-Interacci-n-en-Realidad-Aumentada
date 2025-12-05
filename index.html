@@ -2,9 +2,9 @@
 <html lang="es">
 
 <head>
-    <title>WebXR - AR Animations</title>
+    <title>AR Marker - Hiro Animations</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
         body {
             margin: 0;
@@ -14,15 +14,7 @@
             background-color: #000;
         }
 
-        #app-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* UI Overlay - Importante z-index para que se vea sobre el canvas AR */
+        /* La interfaz de botones se mantiene FLOTANTE sobre el canvas */
         #ui-overlay {
             position: fixed;
             top: 20px;
@@ -31,8 +23,8 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            z-index: 1000; /* Asegura que esté encima del video */
             pointer-events: none;
-            z-index: 1000;
         }
 
         .anim-btn {
@@ -45,61 +37,45 @@
             font-weight: bold;
             cursor: pointer;
             pointer-events: auto;
-            /* Permitir click */
             transition: transform 0.2s, background 0.2s;
             text-align: center;
         }
 
-        .anim-btn:hover {
-            background: #0056b3;
-            transform: scale(1.05);
-        }
+        .anim-btn:hover { background: #0056b3; transform: scale(1.05); }
+        .anim-btn.active { background: #28a745; }
 
-        .anim-btn.active {
-            background: #28a745;
-        }
-
-        /* Mensaje de instrucción para AR */
-        #ar-instructions {
+        /* Mensaje de carga */
+        #loading {
             position: fixed;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.6);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
             color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 16px;
-            display: none;
-            pointer-events: none;
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 999;
         }
     </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/fflate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+
 </head>
 
 <body>
 
-    <div id="app-container"></div>
+    <div id="loading">Cargando cámara y modelo...</div>
 
     <div id="ui-overlay">
-        <div
-            style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; color:white; text-align:center; margin-bottom:10px;">
+        <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; color:white; text-align:center; margin-bottom:10px;">
             Animaciones
         </div>
         <div id="buttons-container" style="display:flex; flex-direction:column; gap:5px; pointer-events:auto;"></div>
     </div>
 
-    <div id="ar-instructions">Apunta al suelo y toca para colocar</div>
-
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-            }
-        }
-    </script>
-
     <script type="module" src="js/main.js"></script>
 </body>
-
 </html>
