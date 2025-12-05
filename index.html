@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>AR Marker - Hiro Animations</title>
+    <title>AR Marker - Final</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -14,7 +14,7 @@
             background-color: #000;
         }
 
-        /* La interfaz de botones se mantiene FLOTANTE sobre el canvas */
+        /* Interfaz de botones */
         #ui-overlay {
             position: fixed;
             top: 20px;
@@ -23,7 +23,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            z-index: 1000; /* Asegura que esté encima del video */
+            z-index: 1000;
             pointer-events: none;
         }
 
@@ -41,25 +41,32 @@
             text-align: center;
         }
 
-        .anim-btn:hover { background: #0056b3; transform: scale(1.05); }
-        .anim-btn.active { background: #28a745; }
+        .anim-btn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
 
-        /* Mensaje de carga */
+        .anim-btn.active {
+            background: #28a745;
+        }
+
+        /* Pantalla de carga */
         #loading {
             position: fixed;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
             z-index: 999;
+            text-align: center;
         }
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/fflate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
 
@@ -67,10 +74,14 @@
 
 <body>
 
-    <div id="loading">Cargando cámara y modelo...</div>
+    <div id="loading">
+        Cargando cámara...<br>
+        <small>Apunta al marcador Hiro</small>
+    </div>
 
     <div id="ui-overlay">
-        <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; color:white; text-align:center; margin-bottom:10px;">
+        <div
+            style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; color:white; text-align:center; margin-bottom:10px;">
             Animaciones
         </div>
         <div id="buttons-container" style="display:flex; flex-direction:column; gap:5px; pointer-events:auto;"></div>
@@ -78,4 +89,5 @@
 
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
